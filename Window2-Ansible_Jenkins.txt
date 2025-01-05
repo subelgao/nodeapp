@@ -1,0 +1,659 @@
+
+suraj@LAPTOP-ILHBUT6P MINGW64 /d/Upgrad/keys
+$ ssh -i "tbd.pem" ubuntu@18.212.149.12
+The authenticity of host '18.212.149.12 (18.212.149.12)' can't be established.
+ED25519 key fingerprint is SHA256:CYmgwGTRqNlpMGUDQs3ITUMSOgsoSZB/7nRZjptqce0.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '18.212.149.12' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-1018-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Jan  5 05:21:21 UTC 2025
+
+  System load:  0.02              Processes:             116
+  Usage of /:   24.7% of 6.71GB   Users logged in:       0
+  Memory usage: 6%                IPv4 address for enX0: 10.0.1.154
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-10-0-1-154:~$ ls -la
+total 28
+drwxr-x--- 4 ubuntu ubuntu 4096 Jan  5 05:21 .
+drwxr-xr-x 3 root   root   4096 Jan  5 05:17 ..
+-rw-r--r-- 1 ubuntu ubuntu  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu 3771 Mar 31  2024 .bashrc
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:21 .cache
+-rw-r--r-- 1 ubuntu ubuntu  807 Mar 31  2024 .profile
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:17 .ssh
+ubuntu@ip-10-0-1-154:~$ ls -la
+total 32
+drwxr-x--- 5 ubuntu ubuntu 4096 Jan  5 05:22 .
+drwxr-xr-x 3 root   root   4096 Jan  5 05:17 ..
+-rw-r--r-- 1 ubuntu ubuntu  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu 3771 Mar 31  2024 .bashrc
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:21 .cache
+-rw-r--r-- 1 ubuntu ubuntu  807 Mar 31  2024 .profile
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:17 .ssh
+drwxrwxr-x 2 ubuntu ubuntu 4096 Jan  5 05:22 ansible
+ubuntu@ip-10-0-1-154:~$ cd ansible/
+ubuntu@ip-10-0-1-154:~/ansible$ ls -la
+total 20
+drwxrwxr-x 2 ubuntu ubuntu 4096 Jan  5 05:22 .
+drwxr-x--- 5 ubuntu ubuntu 4096 Jan  5 05:22 ..
+-rw-rw-r-- 1 ubuntu ubuntu  206 Jan  5 05:22 inventory
+-rw-rw-r-- 1 ubuntu ubuntu 1017 Jan  5 05:22 playbook.yaml
+-rw-rw-r-- 1 ubuntu ubuntu 1675 Jan  5 05:22 tbd.pem
+ubuntu@ip-10-0-1-154:~/ansible$ rm tbd.pem
+ubuntu@ip-10-0-1-154:~/ansible$ vi tbd.pem
+ubuntu@ip-10-0-1-154:~/ansible$ vi inventory
+ubuntu@ip-10-0-1-154:~/ansible$ chmod 400 tbd.pem
+ubuntu@ip-10-0-1-154:~/ansible$ ls -la
+total 20
+drwxrwxr-x 2 ubuntu ubuntu 4096 Jan  5 05:24 .
+drwxr-x--- 5 ubuntu ubuntu 4096 Jan  5 05:24 ..
+-rw-rw-r-- 1 ubuntu ubuntu  203 Jan  5 05:24 inventory
+-rw-rw-r-- 1 ubuntu ubuntu 1017 Jan  5 05:22 playbook.yaml
+-r-------- 1 ubuntu ubuntu 1679 Jan  5 05:23 tbd.pem
+ubuntu@ip-10-0-1-154:~/ansible$ sudo apt-add-repository ppa:ansible/ansible
+Repository: 'Types: deb
+URIs: https://ppa.launchpadcontent.net/ansible/ansible/ubuntu/
+Suites: noble
+Components: main
+'
+Description:
+Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy. Avoid writing scripts or custom code to deploy and update your applications— automate in a language that approaches plain English, using SSH, with no agents to install on remote systems.
+
+http://ansible.com/
+
+If you face any issues while installing Ansible PPA, file an issue here:
+https://github.com/ansible-community/ppa/issues
+More info: https://launchpad.net/~ansible/+archive/ubuntu/ansible
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble InRelease
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:4 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]
+Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe Translation-en [5982 kB]
+Get:7 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu noble InRelease [17.8 kB]
+Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Components [3871 kB]
+Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 c-n-f Metadata [301 kB]
+Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [269 kB]
+Get:11 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse Translation-en [118 kB]
+Get:12 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Components [35.0 kB]
+Get:13 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 c-n-f Metadata [8328 B]
+Get:14 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [764 kB]
+Get:15 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [173 kB]
+Get:16 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [151 kB]
+Get:17 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [967 kB]
+Get:18 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [238 kB]
+Get:19 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [310 kB]
+Get:20 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [19.9 kB]
+Get:21 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [574 kB]
+Get:22 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [111 kB]
+Get:23 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+Get:24 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [16.0 kB]
+Get:25 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [3844 B]
+Get:26 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:27 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [552 B]
+Get:28 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [208 B]
+Get:29 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [112 B]
+Get:30 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [10.7 kB]
+Get:31 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [10.8 kB]
+Get:32 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [11.7 kB]
+Get:33 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1104 B]
+Get:34 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+Get:35 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:36 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Get:37 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:38 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [572 kB]
+Get:39 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu noble/main amd64 Packages [772 B]
+Get:40 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu noble/main Translation-en [472 B]
+Get:41 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [111 kB]
+Get:42 http://security.ubuntu.com/ubuntu noble-security/main amd64 Components [7220 B]
+Get:43 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [795 kB]
+Get:44 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [169 kB]
+Get:45 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Components [52.0 kB]
+Get:46 http://security.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [13.5 kB]
+Get:47 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [560 kB]
+Get:48 http://security.ubuntu.com/ubuntu noble-security/restricted Translation-en [108 kB]
+Get:49 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+Get:50 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [12.2 kB]
+Get:51 http://security.ubuntu.com/ubuntu noble-security/multiverse Translation-en [2940 B]
+Get:52 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+Get:53 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 c-n-f Metadata [356 B]
+Fetched 31.8 MB in 6s (5364 kB/s)
+Reading package lists... Done
+ubuntu@ip-10-0-1-154:~/ansible$ sudo apt update
+Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble InRelease
+Hit:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu noble-security InRelease
+Hit:5 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu noble InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+58 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@ip-10-0-1-154:~/ansible$ sudo apt install ansible
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  ansible-core python3-kerberos python3-nacl python3-ntlm-auth python3-paramiko python3-requests-ntlm python3-resolvelib python3-winrm python3-xmltodict sshpass
+Suggested packages:
+  python-nacl-doc python3-gssapi python3-invoke
+The following NEW packages will be installed:
+  ansible ansible-core python3-kerberos python3-nacl python3-ntlm-auth python3-paramiko python3-requests-ntlm python3-resolvelib python3-winrm python3-xmltodict sshpass
+0 upgraded, 11 newly installed, 0 to remove and 58 not upgraded.
+Need to get 19.2 MB of archives.
+After this operation, 213 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-resolvelib all 1.0.1-1 [25.7 kB]
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-kerberos amd64 1.1.14-3.1build9 [21.2 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 python3-nacl amd64 1.5.0-4build1 [57.9 kB]
+Get:4 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-ntlm-auth all 1.5.0-1 [21.3 kB]
+Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-paramiko all 2.12.0-2ubuntu4.1 [137 kB]
+Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-requests-ntlm all 1.1.0-3 [6308 B]
+Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 python3-xmltodict all 0.13.0-1 [13.4 kB]
+Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 python3-winrm all 0.4.3-2 [31.9 kB]
+Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 sshpass amd64 1.09-1 [11.7 kB]
+Get:10 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu noble/main amd64 ansible-core all 2.17.7-1ppa~noble [1015 kB]
+Get:11 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu noble/main amd64 ansible all 10.7.0-1ppa~noble [17.8 MB]
+Fetched 19.2 MB in 42s (457 kB/s)
+Selecting previously unselected package python3-resolvelib.
+(Reading database ... 70601 files and directories currently installed.)
+Preparing to unpack .../00-python3-resolvelib_1.0.1-1_all.deb ...
+Unpacking python3-resolvelib (1.0.1-1) ...
+Selecting previously unselected package ansible-core.
+Preparing to unpack .../01-ansible-core_2.17.7-1ppa~noble_all.deb ...
+Unpacking ansible-core (2.17.7-1ppa~noble) ...
+Selecting previously unselected package ansible.
+Preparing to unpack .../02-ansible_10.7.0-1ppa~noble_all.deb ...
+Unpacking ansible (10.7.0-1ppa~noble) ...
+Selecting previously unselected package python3-kerberos.
+Preparing to unpack .../03-python3-kerberos_1.1.14-3.1build9_amd64.deb ...
+Unpacking python3-kerberos (1.1.14-3.1build9) ...
+Selecting previously unselected package python3-nacl.
+Preparing to unpack .../04-python3-nacl_1.5.0-4build1_amd64.deb ...
+Unpacking python3-nacl (1.5.0-4build1) ...
+Selecting previously unselected package python3-ntlm-auth.
+Preparing to unpack .../05-python3-ntlm-auth_1.5.0-1_all.deb ...
+Unpacking python3-ntlm-auth (1.5.0-1) ...
+Selecting previously unselected package python3-paramiko.
+Preparing to unpack .../06-python3-paramiko_2.12.0-2ubuntu4.1_all.deb ...
+Unpacking python3-paramiko (2.12.0-2ubuntu4.1) ...
+Selecting previously unselected package python3-requests-ntlm.
+Preparing to unpack .../07-python3-requests-ntlm_1.1.0-3_all.deb ...
+Unpacking python3-requests-ntlm (1.1.0-3) ...
+Selecting previously unselected package python3-xmltodict.
+Preparing to unpack .../08-python3-xmltodict_0.13.0-1_all.deb ...
+Unpacking python3-xmltodict (0.13.0-1) ...
+Selecting previously unselected package python3-winrm.
+Preparing to unpack .../09-python3-winrm_0.4.3-2_all.deb ...
+Unpacking python3-winrm (0.4.3-2) ...
+Selecting previously unselected package sshpass.
+Preparing to unpack .../10-sshpass_1.09-1_amd64.deb ...
+Unpacking sshpass (1.09-1) ...
+Setting up python3-ntlm-auth (1.5.0-1) ...
+Setting up python3-resolvelib (1.0.1-1) ...
+Setting up python3-kerberos (1.1.14-3.1build9) ...
+Setting up ansible-core (2.17.7-1ppa~noble) ...
+Setting up sshpass (1.09-1) ...
+Setting up python3-xmltodict (0.13.0-1) ...
+Setting up ansible (10.7.0-1ppa~noble) ...
+Setting up python3-nacl (1.5.0-4build1) ...
+Setting up python3-requests-ntlm (1.1.0-3) ...
+Setting up python3-winrm (0.4.3-2) ...
+Setting up python3-paramiko (2.12.0-2ubuntu4.1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-10-0-1-154:~/ansible$ ls -llaa
+total 20
+drwxrwxr-x 2 ubuntu ubuntu 4096 Jan  5 05:24 .
+drwxr-x--- 5 ubuntu ubuntu 4096 Jan  5 05:25 ..
+-rw-rw-r-- 1 ubuntu ubuntu  203 Jan  5 05:24 inventory
+-rw-rw-r-- 1 ubuntu ubuntu 1017 Jan  5 05:22 playbook.yaml
+-r-------- 1 ubuntu ubuntu 1679 Jan  5 05:23 tbd.pem
+ubuntu@ip-10-0-1-154:~/ansible$ ansible-playbook playbook.yaml -i inventory --limit jenkins
+
+PLAY [Installation of packages] ******************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************
+The authenticity of host '10.0.3.35 (10.0.3.35)' can't be established.
+ED25519 key fingerprint is SHA256:9jY5mMnjnLYVoBzgW4jbmmdxmon2GxAFKOv5j3IrEw0.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+[WARNING]: Platform linux on host 10.0.3.35 is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more
+information.
+ok: [10.0.3.35]
+
+TASK [ping] **************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [10.0.3.35]
+
+TASK [Install aptitude] **************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.3.35]
+
+TASK [Install required system packages] **********************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.3.35]
+
+TASK [Add Docker GPG apt Key] ********************************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.3.35]
+
+TASK [Add Docker Repository] *********************************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.3.35]
+
+TASK [Update apt and install docker-ce] **********************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.3.35]
+
+PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************
+10.0.3.35                  : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+ubuntu@ip-10-0-1-154:~/ansible$ ansible-playbook playbook.yaml -i inventory --limit app
+
+PLAY [Installation of packages] ******************************************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************************************************************************************************************************************************************************************************
+The authenticity of host '10.0.4.8 (10.0.4.8)' can't be established.
+ED25519 key fingerprint is SHA256:Kyc2F0NTYlPiQWzmhjudVOpza9tRL/KSO9frSsmyq1U.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+[WARNING]: Platform linux on host 10.0.4.8 is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more
+information.
+ok: [10.0.4.8]
+
+TASK [ping] **************************************************************************************************************************************************************************************************************************************************************************************************************
+ok: [10.0.4.8]
+
+TASK [Install aptitude] **************************************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.4.8]
+
+TASK [Install required system packages] **********************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.4.8]
+
+TASK [Add Docker GPG apt Key] ********************************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.4.8]
+
+TASK [Add Docker Repository] *********************************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.4.8]
+
+TASK [Update apt and install docker-ce] **********************************************************************************************************************************************************************************************************************************************************************************
+changed: [10.0.4.8]
+
+PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************************************************************
+10.0.4.8                   : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+ubuntu@ip-10-0-1-154:~/ansible$ ssh -i "tbd.pem" ubuntu@10.0.3.35
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-1018-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Jan  5 05:41:57 UTC 2025
+
+  System load:  0.13              Processes:             378
+  Usage of /:   42.5% of 6.71GB   Users logged in:       0
+  Memory usage: 9%                IPv4 address for enX0: 10.0.3.35
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+52 updates can be applied immediately.
+22 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Sun Jan  5 05:39:46 2025 from 10.0.1.154
+ubuntu@ip-10-0-3-35:~$ ls -la
+total 32
+drwxr-x--- 5 ubuntu ubuntu 4096 Jan  5 05:38 .
+drwxr-xr-x 3 root   root   4096 Jan  5 05:17 ..
+drwx------ 3 ubuntu ubuntu 4096 Jan  5 05:38 .ansible
+-rw-r--r-- 1 ubuntu ubuntu  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu 3771 Mar 31  2024 .bashrc
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:38 .cache
+-rw-r--r-- 1 ubuntu ubuntu  807 Mar 31  2024 .profile
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:17 .ssh
+-rw-r--r-- 1 ubuntu ubuntu    0 Jan  5 05:38 .sudo_as_admin_successful
+ubuntu@ip-10-0-3-35:~$ docker
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container
+  ps          List containers
+  build       Build an image from a Dockerfile
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  images      List images
+  login       Authenticate to a registry
+  logout      Log out from a registry
+  search      Search Docker Hub for images
+  version     Show the Docker version information
+  info        Display system-wide information
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Docker Buildx
+  checkpoint  Manage checkpoints
+  compose*    Docker Compose
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  plugin      Manage plugins
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Swarm Commands:
+  config      Manage Swarm configs
+  node        Manage Swarm nodes
+  secret      Manage Swarm secrets
+  service     Manage Swarm services
+  stack       Manage Swarm stacks
+  swarm       Manage Swarm
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Global Options:
+      --config string      Location of client config files (default "/home/ubuntu/.docker")
+  -c, --context string     Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket to connect to
+  -l, --log-level string   Set the logging level ("debug", "info", "warn", "error", "fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default "/home/ubuntu/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default "/home/ubuntu/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default "/home/ubuntu/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Run 'docker COMMAND --help' for more information on a command.
+
+For more help on how to use Docker, head to https://docs.docker.com/go/guides/
+ubuntu@ip-10-0-3-35:~$ docker run -itd -p 8080:8080 --env JENKINS_OPTS="--prefix=/jenkins" jenkins/jenkins:lts
+docker: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Head "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied.
+See 'docker run --help'.
+ubuntu@ip-10-0-3-35:~$ sudo usermod -aG docker ${USER}
+ubuntu@ip-10-0-3-35:~$ exit
+logout
+Connection to 10.0.3.35 closed.
+ubuntu@ip-10-0-1-154:~/ansible$ ssh -i "tbd.pem" ubuntu@10.0.3.35
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-1018-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Jan  5 05:43:56 UTC 2025
+
+  System load:  0.02              Processes:             378
+  Usage of /:   42.5% of 6.71GB   Users logged in:       0
+  Memory usage: 8%                IPv4 address for enX0: 10.0.3.35
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+52 updates can be applied immediately.
+22 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Sun Jan  5 05:41:58 2025 from 10.0.1.154
+ubuntu@ip-10-0-3-35:~$ docker run -itd -p 8080:8080 --env JENKINS_OPTS="--prefix=/jenkins" jenkins/jenkins:lts
+Unable to find image 'jenkins/jenkins:lts' locally
+lts: Pulling from jenkins/jenkins
+b2b31b28ee3c: Pull complete
+768595d27f0b: Pull complete
+2902ddfaf8af: Pull complete
+1944ded7dbca: Pull complete
+37b0412849e4: Pull complete
+9e6f96481dc6: Pull complete
+8d5cd706e369: Pull complete
+e1d3077f0c0c: Pull complete
+66714a60a07a: Pull complete
+e37c8a6a1d29: Pull complete
+0867b45f78b4: Pull complete
+d0238388e632: Pull complete
+Digest: sha256:e728082cd6a2710840ef7d9fdcdc93408eb488aa05d10bc92f4454254e22cc4e
+Status: Downloaded newer image for jenkins/jenkins:lts
+86410cddf0277bb1eec4f3244bda9b5597a082cb49bc4c18f049b3d29fda9572
+ubuntu@ip-10-0-3-35:~$ docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED         STATUS         PORTS                                                  NAMES
+86410cddf027   jenkins/jenkins:lts   "/usr/bin/tini -- /u…"   4 seconds ago   Up 3 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 50000/tcp   zealous_jepsen
+ubuntu@ip-10-0-3-35:~$ docker exec --help
+
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Execute a command in a running container
+
+Aliases:
+  docker container exec, docker exec
+
+Options:
+  -d, --detach               Detached mode: run command in the background
+      --detach-keys string   Override the key sequence for detaching a container
+  -e, --env list             Set environment variables
+      --env-file list        Read in a file of environment variables
+  -i, --interactive          Keep STDIN open even if not attached
+      --privileged           Give extended privileges to the command
+  -t, --tty                  Allocate a pseudo-TTY
+  -u, --user string          Username or UID (format: "<name|uid>[:<group|gid>]")
+  -w, --workdir string       Working directory inside the container
+ubuntu@ip-10-0-3-35:~$ docker exec -itd 86410cddf027 /bash
+Error response from daemon: OCI runtime exec failed: exec failed: unable to start container process: exec: "/bash": stat /bash: no such file or directory: unknown
+ubuntu@ip-10-0-3-35:~$ docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED         STATUS         PORTS                                                  NAMES
+86410cddf027   jenkins/jenkins:lts   "/usr/bin/tini -- /u…"   6 minutes ago   Up 6 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 50000/tcp   zealous_jepsen
+ubuntu@ip-10-0-3-35:~$ docker exec -itd 86410cddf027 /bib/bash
+Error response from daemon: OCI runtime exec failed: exec failed: unable to start container process: exec: "/bib/bash": stat /bib/bash: no such file or directory: unknown
+ubuntu@ip-10-0-3-35:~$ docker exec -itd 86410cddf027 /bin/bash
+ubuntu@ip-10-0-3-35:~$ docker exec -it 86410cddf027 /bin/bash
+jenkins@86410cddf027:/$ sudo cat /var/jenkins_home/secrets/initialAdminPassword
+bash: sudo: command not found
+jenkins@86410cddf027:/$ cat /var/jenkins_home/secrets/initialAdminPassword
+b5549ded7bf444a1a6ea950b7c348d83
+jenkins@86410cddf027:/$ ls -la
+total 56
+drwxr-xr-x   1 root root 4096 Jan  5 05:44 .
+drwxr-xr-x   1 root root 4096 Jan  5 05:44 ..
+-rwxr-xr-x   1 root root    0 Jan  5 05:44 .dockerenv
+lrwxrwxrwx   1 root root    7 Nov 11 00:00 bin -> usr/bin
+drwxr-xr-x   2 root root 4096 Oct 31 11:04 boot
+drwxr-xr-x   5 root root  360 Jan  5 05:44 dev
+drwxr-xr-x   1 root root 4096 Jan  5 05:44 etc
+drwxr-xr-x   2 root root 4096 Oct 31 11:04 home
+lrwxrwxrwx   1 root root    7 Nov 11 00:00 lib -> usr/lib
+lrwxrwxrwx   1 root root    9 Nov 11 00:00 lib64 -> usr/lib64
+drwxr-xr-x   2 root root 4096 Nov 11 00:00 media
+drwxr-xr-x   2 root root 4096 Nov 11 00:00 mnt
+drwxr-xr-x   1 root root 4096 Nov 27 12:51 opt
+dr-xr-xr-x 185 root root    0 Jan  5 05:44 proc
+drwx------   1 root root 4096 Nov 27 12:51 root
+drwxr-xr-x   1 root root 4096 Nov 27 12:51 run
+lrwxrwxrwx   1 root root    8 Nov 11 00:00 sbin -> usr/sbin
+drwxr-xr-x   2 root root 4096 Nov 11 00:00 srv
+dr-xr-xr-x  13 root root    0 Jan  5 05:44 sys
+drwxrwxrwt   1 root root 4096 Jan  5 05:44 tmp
+drwxr-xr-x   1 root root 4096 Nov 11 00:00 usr
+drwxr-xr-x   1 root root 4096 Nov 27 12:51 var
+jenkins@86410cddf027:/$ pwd
+/
+jenkins@86410cddf027:/$ cd /home
+jenkins@86410cddf027:/home$ ls -la
+total 8
+drwxr-xr-x 2 root root 4096 Oct 31 11:04 .
+drwxr-xr-x 1 root root 4096 Jan  5 05:44 ..
+jenkins@86410cddf027:/home$ exit
+exit
+ubuntu@ip-10-0-3-35:~$ docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+86410cddf027   jenkins/jenkins:lts   "/usr/bin/tini -- /u…"   11 minutes ago   Up 11 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 50000/tcp   zealous_jepsen
+ubuntu@ip-10-0-3-35:~$ docker stop 86410cddf027
+86410cddf027
+ubuntu@ip-10-0-3-35:~$ docker images
+REPOSITORY        TAG       IMAGE ID       CREATED       SIZE
+jenkins/jenkins   lts       e699ac6c40dc   5 weeks ago   467MB
+ubuntu@ip-10-0-3-35:~$ docker run -itd -p 8080:8080 --env JENKINS_OPTS="--prefix=/jenkins" jenkins/jenkins:lts
+1ef4766cd7ac2b4dba08acc3b64ca2c8e45834f8d33e3a8b3e88bd2e02fe7de4
+ubuntu@ip-10-0-3-35:~$ docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+1ef4766cd7ac   jenkins/jenkins:lts   "/usr/bin/tini -- /u…"   38 seconds ago   Up 37 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 50000/tcp   elegant_nash
+ubuntu@ip-10-0-3-35:~$ docker exec -it 1ef4766cd7ac /bin/bash
+jenkins@1ef4766cd7ac:/$ cat /var/jenkins_home/secrets/initialAdminPassword
+134de679cfa04b3196d9ea93ca8bd887
+jenkins@1ef4766cd7ac:/$ client_loop: send disconnect: Connection reset by peer
+
+suraj@LAPTOP-ILHBUT6P MINGW64 /d/Upgrad/keys
+$ ssh -i "tbd.pem" ubuntu@18.212.149.12
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-1018-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Jan  5 06:45:48 UTC 2025
+
+  System load:  0.0               Processes:             126
+  Usage of /:   38.0% of 6.71GB   Users logged in:       1
+  Memory usage: 10%               IPv4 address for enX0: 10.0.1.154
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+32 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+*** System restart required ***
+Last login: Sun Jan  5 06:35:17 2025 from 106.51.202.30
+ubuntu@ip-10-0-1-154:~$ cd ansible/
+ubuntu@ip-10-0-1-154:~/ansible$ ssh -i "tbd.pem" ubuntu@10.0.3.35
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-1018-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Jan  5 06:46:12 UTC 2025
+
+  System load:  0.07              Processes:             129
+  Usage of /:   62.0% of 6.71GB   Users logged in:       1
+  Memory usage: 30%               IPv4 address for enX0: 10.0.3.35
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+30 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+*** System restart required ***
+Last login: Sun Jan  5 05:43:57 2025 from 10.0.1.154
+ubuntu@ip-10-0-3-35:~$ docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+1ef4766cd7ac   jenkins/jenkins:lts   "/usr/bin/tini -- /u…"   49 minutes ago   Up 49 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 50000/tcp   elegant_nash
+ubuntu@ip-10-0-3-35:~$ docker stop 1ef4766cd7ac
+1ef4766cd7ac
+ubuntu@ip-10-0-3-35:~$ docker rm 1ef4766cd7ac
+1ef4766cd7ac
+ubuntu@ip-10-0-3-35:~$ docker run -d --name jenkins-docker -it --env JENKINS_OPTS="--prefix=/jenkins" -p 8080:8080 -p 50000:50000 -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:lts
+d8cd438ae8ca40a522f1132d6734f0ad43e210de5d4177f8aecf5d9c85de4d10
+ubuntu@ip-10-0-3-35:~$ docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS          PORTS                                                                                      NAMES
+d8cd438ae8ca   jenkins/jenkins:lts   "/usr/bin/tini -- /u…"   13 seconds ago   Up 13 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:50000->50000/tcp, :::50000->50000/tcp   jenkins-docker
+ubuntu@ip-10-0-3-35:~$ dcoker exec -it d8cd438ae8ca /bin/bash
+Command 'dcoker' not found, did you mean:
+  command 'docker' from deb docker.io (24.0.7-0ubuntu4.1)
+  command 'docker' from deb podman-docker (4.9.3+ds1-1ubuntu0.2)
+Try: sudo apt install <deb name>
+ubuntu@ip-10-0-3-35:~$ docker exec -it d8cd438ae8ca /bin/bash
+jenkins@d8cd438ae8ca:/$ cat /var/jenkins_home/secrets/initialAdminPassword
+579fa95c855d451887194d6d9efc1cf9
+jenkins@d8cd438ae8ca:/$
