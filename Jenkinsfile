@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'app'
-    }
+    agent none
     environment {
         AWS_REGION = 'us-east-1' // Replace with your AWS region
         ECR_REPOSITORY = 'ninja' // Replace with your ECR repository name
@@ -12,6 +10,7 @@ pipeline {
     }
     stages {
         stage('Build Docker Image') {
+        agent { label 'app' }
             steps {
                 sh '''
                 echo "Building Docker image..."
@@ -20,6 +19,7 @@ pipeline {
             }
         }
         stage('Push to ECR') {
+        agent { label 'app' }
             steps {
                 sh '''
                 echo "Logging in to ECR..."
@@ -32,6 +32,7 @@ pipeline {
             }
         }
         stage('Deploy on EC2') {
+        agent { label 'app' }
             steps {
                 sh '''
                 #echo "Connecting to EC2 instance and deploying the container..."
