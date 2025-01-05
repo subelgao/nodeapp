@@ -35,8 +35,6 @@ pipeline {
         agent { label 'app' }
             steps {
                 sh '''
-                #echo "Connecting to EC2 instance and deploying the container..."
-                #ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_IP << EOF
                 docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com <<< $(aws ecr get-login-password --region $AWS_REGION)
                 docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
                 docker stop upg-app-1 || true
