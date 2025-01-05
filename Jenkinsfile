@@ -10,7 +10,7 @@ pipeline {
     }
     stages {
         stage('Build Docker Image') {
-        agent { label 'app' }
+            agent { label 'app' }
             steps {
                 sh '''
                 echo "Building Docker image..."
@@ -19,7 +19,7 @@ pipeline {
             }
         }
         stage('Push to ECR') {
-        agent { label 'app' }
+            agent { label 'app' }
             steps {
                 sh '''
                 echo "Logging in to ECR..."
@@ -32,15 +32,21 @@ pipeline {
             }
         }
         stage('Deploy on EC2') {
-        agent { label 'app' }
+            agent { label 'app' }
             steps {
                 sh '''
-                docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com <<< $(aws ecr get-login-password --region $AWS_REGION)
+                echo "Logging in to ECR..."
+                aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
+                echo "Pulling Docker image from ECR..."
                 docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+
+                echo "Stopping and removing any existing container..."
                 docker stop upg-app-1 || true
                 docker rm upg-app-1 || true
+
+                echo "Running the new Docker container..."
                 docker run -d -p 8081:8081 --name upg-app-1 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
-                EOF
                 '''
             }
         }
