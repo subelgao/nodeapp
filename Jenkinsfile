@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         AWS_REGION = 'us-east-1' // Replace with your AWS region
-        ECR_REPOSITORY = 'Ninja' // Replace with your ECR repository name
+        ECR_REPOSITORY = 'ninja' // Replace with your ECR repository name
         IMAGE_TAG = "${env.BUILD_ID}" // Tag image with Jenkins build ID
         AWS_ACCOUNT_ID = '524771228897' // Replace with your AWS account ID
         EC2_USER = 'ubuntu' // Default EC2 username
