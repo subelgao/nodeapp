@@ -1,0 +1,1632 @@
+
+suraj@LAPTOP-ILHBUT6P MINGW64 /d/Upgrad/keys
+$ ssh -i "tbd.pem" ubuntu@ec2-18-207-117-196.compute-1.amazonaws.com
+The authenticity of host 'ec2-18-207-117-196.compute-1.amazonaws.com (18.207.117.196)' can't be established.
+ED25519 key fingerprint is SHA256:Tbi39e7pq7nX68OgJU7ZXvi1TWCawg5pcv9gXA1yySI.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-18-207-117-196.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 6.8.0-1018-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Jan  5 05:07:22 UTC 2025
+
+  System load:  0.73              Processes:             122
+  Usage of /:   7.2% of 23.17GB   Users logged in:       0
+  Memory usage: 5%                IPv4 address for enX0: 172.31.24.181
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-24-181:~$ ls -la
+total 32
+drwxr-x--- 5 ubuntu ubuntu 4096 Jan  5 05:08 .
+drwxr-xr-x 3 root   root   4096 Jan  5 05:07 ..
+-rw-r--r-- 1 ubuntu ubuntu  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu 3771 Mar 31  2024 .bashrc
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:07 .cache
+-rw-r--r-- 1 ubuntu ubuntu  807 Mar 31  2024 .profile
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:07 .ssh
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:08 terraform
+ubuntu@ip-172-31-24-181:~$ wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+--2025-01-05 05:08:33--  https://apt.releases.hashicorp.com/gpg
+Resolving apt.releases.hashicorp.com (apt.releases.hashicorp.com)... 18.160.10.126, 18.160.10.45, 18.160.10.69, ...
+Connecting to apt.releases.hashicorp.com (apt.releases.hashicorp.com)|18.160.10.126|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3980 (3.9K) [binary/octet-stream]
+Saving to: ‘STDOUT’
+
+-                                                                              100%[==================================================================================================================================================================================================>]   3.89K  --.-KB/s    in 0s
+
+2025-01-05 05:08:33 (637 MB/s) - written to stdout [3980/3980]
+
+ubuntu@ip-172-31-24-181:~$ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com noble main
+ubuntu@ip-172-31-24-181:~$ sudo apt update && sudo apt install terraform
+Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble InRelease
+Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:4 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:5 https://apt.releases.hashicorp.com noble InRelease [12.9 kB]
+Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]
+Get:7 https://apt.releases.hashicorp.com noble/main amd64 Packages [163 kB]
+Get:8 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [572 kB]
+Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe Translation-en [5982 kB]
+Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Components [3871 kB]
+Get:11 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 c-n-f Metadata [301 kB]
+Get:12 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [269 kB]
+Get:13 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse Translation-en [118 kB]
+Get:14 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Components [35.0 kB]
+Get:15 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 c-n-f Metadata [8328 B]
+Get:16 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [764 kB]
+Get:17 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [111 kB]
+Get:18 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [173 kB]
+Get:19 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [151 kB]
+Get:20 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [967 kB]
+Get:21 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [238 kB]
+Get:22 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [310 kB]
+Get:23 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [19.9 kB]
+Get:24 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [574 kB]
+Get:25 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [111 kB]
+Get:26 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+Get:27 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [16.0 kB]
+Get:28 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [3844 B]
+Get:29 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:30 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [552 B]
+Get:31 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [208 B]
+Get:32 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [112 B]
+Get:33 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [10.7 kB]
+Get:34 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [10.8 kB]
+Get:35 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [11.7 kB]
+Get:36 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1104 B]
+Get:37 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+Get:38 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:39 http://security.ubuntu.com/ubuntu noble-security/main amd64 Components [7220 B]
+Get:40 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [795 kB]
+Get:41 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Get:42 http://us-east-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:43 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [169 kB]
+Get:44 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Components [52.0 kB]
+Get:45 http://security.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [13.5 kB]
+Get:46 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [560 kB]
+Get:47 http://security.ubuntu.com/ubuntu noble-security/restricted Translation-en [108 kB]
+Get:48 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+Get:49 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [12.2 kB]
+Get:50 http://security.ubuntu.com/ubuntu noble-security/multiverse Translation-en [2940 B]
+Get:51 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+Get:52 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 c-n-f Metadata [356 B]
+Fetched 31.9 MB in 5s (6134 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+58 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  terraform
+0 upgraded, 1 newly installed, 0 to remove and 58 not upgraded.
+Need to get 27.4 MB of archives.
+After this operation, 90.2 MB of additional disk space will be used.
+Get:1 https://apt.releases.hashicorp.com noble/main amd64 terraform amd64 1.10.3-1 [27.4 MB]
+Fetched 27.4 MB in 0s (59.7 MB/s)
+Selecting previously unselected package terraform.
+(Reading database ... 70601 files and directories currently installed.)
+Preparing to unpack .../terraform_1.10.3-1_amd64.deb ...
+Unpacking terraform (1.10.3-1) ...
+Setting up terraform (1.10.3-1) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-24-181:~$ terraform -version
+Terraform v1.10.3
+on linux_amd64
+ubuntu@ip-172-31-24-181:~$ ls -la
+total 40
+drwxr-x--- 6 ubuntu ubuntu 4096 Jan  5 05:09 .
+drwxr-xr-x 3 root   root   4096 Jan  5 05:07 ..
+-rw-r--r-- 1 ubuntu ubuntu  220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu 3771 Mar 31  2024 .bashrc
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:07 .cache
+-rw-r--r-- 1 ubuntu ubuntu  807 Mar 31  2024 .profile
+drwx------ 2 ubuntu ubuntu 4096 Jan  5 05:07 .ssh
+-rw-r--r-- 1 ubuntu ubuntu    0 Jan  5 05:08 .sudo_as_admin_successful
+drwxr-xr-x 2 ubuntu ubuntu 4096 Jan  5 05:09 .terraform.d
+-rw-rw-r-- 1 ubuntu ubuntu  181 Jan  5 05:08 .wget-hsts
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:08 terraform
+ubuntu@ip-172-31-24-181:~$ cd terraform/
+ubuntu@ip-172-31-24-181:~/terraform$ ls -la
+total 36
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:08 .
+drwxr-x--- 6 ubuntu ubuntu 4096 Jan  5 05:09 ..
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:08 .terraform
+-rw-rw-r-- 1 ubuntu ubuntu 1406 Jan  5 05:08 .terraform.lock.hcl
+-rw-rw-r-- 1 ubuntu ubuntu 1196 Jan  5 05:08 main.tf
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:08 modules
+-rw-rw-r-- 1 ubuntu ubuntu  349 Jan  5 05:08 outputs.tf
+-rw-rw-r-- 1 ubuntu ubuntu  515 Jan  5 05:08 terraform.tfvars
+-rw-rw-r-- 1 ubuntu ubuntu  988 Jan  5 05:08 variables.tf
+ubuntu@ip-172-31-24-181:~/terraform$ rm rf .terraform .terraform.lock.hcl
+rm: cannot remove 'rf': No such file or directory
+rm: cannot remove '.terraform': Is a directory
+ubuntu@ip-172-31-24-181:~/terraform$ ls -la
+total 32
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:15 .
+drwxr-x--- 6 ubuntu ubuntu 4096 Jan  5 05:09 ..
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:08 .terraform
+-rw-rw-r-- 1 ubuntu ubuntu 1196 Jan  5 05:08 main.tf
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:08 modules
+-rw-rw-r-- 1 ubuntu ubuntu  349 Jan  5 05:08 outputs.tf
+-rw-rw-r-- 1 ubuntu ubuntu  515 Jan  5 05:08 terraform.tfvars
+-rw-rw-r-- 1 ubuntu ubuntu  988 Jan  5 05:08 variables.tf
+ubuntu@ip-172-31-24-181:~/terraform$ rm -rf .terraform .terraform.lock.hcl
+ubuntu@ip-172-31-24-181:~/terraform$ ls -la
+total 28
+drwxrwxr-x 3 ubuntu ubuntu 4096 Jan  5 05:16 .
+drwxr-x--- 6 ubuntu ubuntu 4096 Jan  5 05:09 ..
+-rw-rw-r-- 1 ubuntu ubuntu 1196 Jan  5 05:08 main.tf
+drwxrwxr-x 4 ubuntu ubuntu 4096 Jan  5 05:08 modules
+-rw-rw-r-- 1 ubuntu ubuntu  349 Jan  5 05:08 outputs.tf
+-rw-rw-r-- 1 ubuntu ubuntu  515 Jan  5 05:08 terraform.tfvars
+-rw-rw-r-- 1 ubuntu ubuntu  988 Jan  5 05:08 variables.tf
+ubuntu@ip-172-31-24-181:~/terraform$ terraform init
+Initializing the backend...
+Initializing modules...
+- ec2 in modules/ec2
+- vpc in modules/vpc
+╷
+│ Error: No valid credential sources found
+│
+│ Please see https://www.terraform.io/docs/language/settings/backends/s3.html
+│ for more information about providing credentials.
+│
+│ Error: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, http response error StatusCode: 404, request to EC2 IMDS failed
+│
+╵
+ubuntu@ip-172-31-24-181:~/terraform$ terraform init
+Initializing the backend...
+
+Successfully configured the backend "s3"! Terraform will automatically
+use this backend unless the backend configuration changes.
+Initializing modules...
+Initializing provider plugins...
+- Finding hashicorp/aws versions matching "5.76.0"...
+- Installing hashicorp/aws v5.76.0...
+- Installed hashicorp/aws v5.76.0 (signed by HashiCorp)
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+ubuntu@ip-172-31-24-181:~/terraform$ terraform plan
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.ec2.aws_instance.app will be created
+  + resource "aws_instance" "app" {
+      + ami                                  = "ami-0e2c8caa4b6378d8c"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.medium"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "tbd"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "Ninja-app"
+        }
+      + tags_all                             = {
+          + "Name" = "Ninja-app"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # module.ec2.aws_instance.bastion will be created
+  + resource "aws_instance" "bastion" {
+      + ami                                  = "ami-0e2c8caa4b6378d8c"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.medium"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "tbd"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "Ninja-bastion"
+        }
+      + tags_all                             = {
+          + "Name" = "Ninja-bastion"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # module.ec2.aws_instance.jenkins will be created
+  + resource "aws_instance" "jenkins" {
+      + ami                                  = "ami-0e2c8caa4b6378d8c"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.medium"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "tbd"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "Ninja-jenkins"
+        }
+      + tags_all                             = {
+          + "Name" = "Ninja-jenkins"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # module.ec2.aws_security_group.bastion_sg will be created
+  + resource "aws_security_group" "bastion_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security group for Bastion host"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "106.51.202.30/32",
+                ]
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = "Ninja-bastion-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "Ninja-bastion-sg"
+        }
+      + tags_all               = {
+          + "Name" = "Ninja-bastion-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.ec2.aws_security_group.private_sg will be created
+  + resource "aws_security_group" "private_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security group for private instances"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "10.0.0.0/16",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = "Ninja-private-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "Ninja-private-sg"
+        }
+      + tags_all               = {
+          + "Name" = "Ninja-private-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.ec2.aws_security_group.public_sg will be created
+  + resource "aws_security_group" "public_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security group for public web instances"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "106.51.202.30/32",
+                ]
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = "Ninja-public-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "Ninja-public-sg"
+        }
+      + tags_all               = {
+          + "Name" = "Ninja-public-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.vpc.aws_eip.main will be created
+  + resource "aws_eip" "main" {
+      + allocation_id        = (known after apply)
+      + arn                  = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = (known after apply)
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + ipam_pool_id         = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + ptr_record           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags                 = {
+          + "Name" = "Ninja-eip"
+        }
+      + tags_all             = {
+          + "Name" = "Ninja-eip"
+        }
+      + vpc                  = true
+    }
+
+  # module.vpc.aws_internet_gateway.main will be created
+  + resource "aws_internet_gateway" "main" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + tags     = {
+          + "Name" = "Ninja-igw"
+        }
+      + tags_all = {
+          + "Name" = "Ninja-igw"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # module.vpc.aws_nat_gateway.main will be created
+  + resource "aws_nat_gateway" "main" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags                               = {
+          + "Name" = "Ninja-nat-gateway"
+        }
+      + tags_all                           = {
+          + "Name" = "Ninja-nat-gateway"
+        }
+    }
+
+  # module.vpc.aws_route_table.private will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + nat_gateway_id             = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "Ninja-private-rt"
+        }
+      + tags_all         = {
+          + "Name" = "Ninja-private-rt"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table.public will be created
+  + resource "aws_route_table" "public" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + gateway_id                 = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "Ninja-public-rt"
+        }
+      + tags_all         = {
+          + "Name" = "Ninja-public-rt"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.private_az1 will be created
+  + resource "aws_route_table_association" "private_az1" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.private_az2 will be created
+  + resource "aws_route_table_association" "private_az2" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.public_az1 will be created
+  + resource "aws_route_table_association" "public_az1" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.public_az2 will be created
+  + resource "aws_route_table_association" "public_az2" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private_az1 will be created
+  + resource "aws_subnet" "private_az1" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.3.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "Ninja-private-az1"
+        }
+      + tags_all                                       = {
+          + "Name" = "Ninja-private-az1"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private_az2 will be created
+  + resource "aws_subnet" "private_az2" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.4.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "Ninja-private-az2"
+        }
+      + tags_all                                       = {
+          + "Name" = "Ninja-private-az2"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.public_az1 will be created
+  + resource "aws_subnet" "public_az1" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "Ninja-public-az1"
+        }
+      + tags_all                                       = {
+          + "Name" = "Ninja-public-az1"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.public_az2 will be created
+  + resource "aws_subnet" "public_az2" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "Ninja-public-az2"
+        }
+      + tags_all                                       = {
+          + "Name" = "Ninja-public-az2"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_vpc.main will be created
+  + resource "aws_vpc" "main" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "10.0.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = (known after apply)
+      + enable_dns_support                   = true
+      + enable_network_address_usage_metrics = (known after apply)
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + ipv6_cidr_block                      = (known after apply)
+      + ipv6_cidr_block_network_border_group = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + tags                                 = {
+          + "Name" = "Ninja-vpc"
+        }
+      + tags_all                             = {
+          + "Name" = "Ninja-vpc"
+        }
+    }
+
+Plan: 20 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + private_subnet_az1_id = (known after apply)
+  + private_subnet_az2_id = (known after apply)
+  + public_subnet_az1_id  = (known after apply)
+  + public_subnet_az2_id  = (known after apply)
+  + vpc_id                = (known after apply)
+╷
+│ Warning: Argument is deprecated
+│
+│   with module.vpc.aws_eip.main,
+│   on modules/vpc/main.tf line 60, in resource "aws_eip" "main":
+│   60:   vpc = true
+│
+│ use domain attribute instead
+│
+│ (and one more similar warning elsewhere)
+╵
+
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+ubuntu@ip-172-31-24-181:~/terraform$ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.ec2.aws_instance.app will be created
+  + resource "aws_instance" "app" {
+      + ami                                  = "ami-0e2c8caa4b6378d8c"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.medium"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "tbd"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "Ninja-app"
+        }
+      + tags_all                             = {
+          + "Name" = "Ninja-app"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # module.ec2.aws_instance.bastion will be created
+  + resource "aws_instance" "bastion" {
+      + ami                                  = "ami-0e2c8caa4b6378d8c"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.medium"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "tbd"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "Ninja-bastion"
+        }
+      + tags_all                             = {
+          + "Name" = "Ninja-bastion"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # module.ec2.aws_instance.jenkins will be created
+  + resource "aws_instance" "jenkins" {
+      + ami                                  = "ami-0e2c8caa4b6378d8c"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.medium"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "tbd"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "Ninja-jenkins"
+        }
+      + tags_all                             = {
+          + "Name" = "Ninja-jenkins"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device (known after apply)
+    }
+
+  # module.ec2.aws_security_group.bastion_sg will be created
+  + resource "aws_security_group" "bastion_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security group for Bastion host"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "106.51.202.30/32",
+                ]
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = "Ninja-bastion-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "Ninja-bastion-sg"
+        }
+      + tags_all               = {
+          + "Name" = "Ninja-bastion-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.ec2.aws_security_group.private_sg will be created
+  + resource "aws_security_group" "private_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security group for private instances"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "10.0.0.0/16",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = "Ninja-private-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "Ninja-private-sg"
+        }
+      + tags_all               = {
+          + "Name" = "Ninja-private-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.ec2.aws_security_group.public_sg will be created
+  + resource "aws_security_group" "public_sg" {
+      + arn                    = (known after apply)
+      + description            = "Security group for public web instances"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "106.51.202.30/32",
+                ]
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = "Ninja-public-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "Ninja-public-sg"
+        }
+      + tags_all               = {
+          + "Name" = "Ninja-public-sg"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.vpc.aws_eip.main will be created
+  + resource "aws_eip" "main" {
+      + allocation_id        = (known after apply)
+      + arn                  = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = (known after apply)
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + ipam_pool_id         = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + ptr_record           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags                 = {
+          + "Name" = "Ninja-eip"
+        }
+      + tags_all             = {
+          + "Name" = "Ninja-eip"
+        }
+      + vpc                  = true
+    }
+
+  # module.vpc.aws_internet_gateway.main will be created
+  + resource "aws_internet_gateway" "main" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + tags     = {
+          + "Name" = "Ninja-igw"
+        }
+      + tags_all = {
+          + "Name" = "Ninja-igw"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # module.vpc.aws_nat_gateway.main will be created
+  + resource "aws_nat_gateway" "main" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags                               = {
+          + "Name" = "Ninja-nat-gateway"
+        }
+      + tags_all                           = {
+          + "Name" = "Ninja-nat-gateway"
+        }
+    }
+
+  # module.vpc.aws_route_table.private will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + nat_gateway_id             = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "Ninja-private-rt"
+        }
+      + tags_all         = {
+          + "Name" = "Ninja-private-rt"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table.public will be created
+  + resource "aws_route_table" "public" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + gateway_id                 = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "Ninja-public-rt"
+        }
+      + tags_all         = {
+          + "Name" = "Ninja-public-rt"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.private_az1 will be created
+  + resource "aws_route_table_association" "private_az1" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.private_az2 will be created
+  + resource "aws_route_table_association" "private_az2" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.public_az1 will be created
+  + resource "aws_route_table_association" "public_az1" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_route_table_association.public_az2 will be created
+  + resource "aws_route_table_association" "public_az2" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private_az1 will be created
+  + resource "aws_subnet" "private_az1" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.3.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "Ninja-private-az1"
+        }
+      + tags_all                                       = {
+          + "Name" = "Ninja-private-az1"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.private_az2 will be created
+  + resource "aws_subnet" "private_az2" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.4.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "Ninja-private-az2"
+        }
+      + tags_all                                       = {
+          + "Name" = "Ninja-private-az2"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.public_az1 will be created
+  + resource "aws_subnet" "public_az1" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "Ninja-public-az1"
+        }
+      + tags_all                                       = {
+          + "Name" = "Ninja-public-az1"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_subnet.public_az2 will be created
+  + resource "aws_subnet" "public_az2" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "Ninja-public-az2"
+        }
+      + tags_all                                       = {
+          + "Name" = "Ninja-public-az2"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_vpc.main will be created
+  + resource "aws_vpc" "main" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "10.0.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = (known after apply)
+      + enable_dns_support                   = true
+      + enable_network_address_usage_metrics = (known after apply)
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + ipv6_cidr_block                      = (known after apply)
+      + ipv6_cidr_block_network_border_group = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + tags                                 = {
+          + "Name" = "Ninja-vpc"
+        }
+      + tags_all                             = {
+          + "Name" = "Ninja-vpc"
+        }
+    }
+
+Plan: 20 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + private_subnet_az1_id = (known after apply)
+  + private_subnet_az2_id = (known after apply)
+  + public_subnet_az1_id  = (known after apply)
+  + public_subnet_az2_id  = (known after apply)
+  + vpc_id                = (known after apply)
+╷
+│ Warning: Argument is deprecated
+│
+│   with module.vpc.aws_eip.main,
+│   on modules/vpc/main.tf line 60, in resource "aws_eip" "main":
+│   60:   vpc = true
+│
+│ use domain attribute instead
+│
+│ (and one more similar warning elsewhere)
+╵
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+module.vpc.aws_eip.main: Creating...
+module.vpc.aws_vpc.main: Creating...
+module.vpc.aws_eip.main: Creation complete after 0s [id=eipalloc-0ccfa736d848e1de4]
+module.vpc.aws_vpc.main: Creation complete after 1s [id=vpc-0287578577e54fbca]
+module.vpc.aws_subnet.public_az2: Creating...
+module.vpc.aws_subnet.private_az1: Creating...
+module.vpc.aws_subnet.private_az2: Creating...
+module.vpc.aws_subnet.public_az1: Creating...
+module.vpc.aws_internet_gateway.main: Creating...
+module.ec2.aws_security_group.bastion_sg: Creating...
+module.ec2.aws_security_group.private_sg: Creating...
+module.ec2.aws_security_group.public_sg: Creating...
+module.vpc.aws_internet_gateway.main: Creation complete after 0s [id=igw-041840d80b13d43bd]
+module.vpc.aws_route_table.public: Creating...
+module.vpc.aws_subnet.private_az1: Creation complete after 0s [id=subnet-0eab6b33cb7839de8]
+module.vpc.aws_subnet.private_az2: Creation complete after 0s [id=subnet-0e39ee2a0d3604481]
+module.vpc.aws_route_table.public: Creation complete after 1s [id=rtb-0b158c368b55670cb]
+module.ec2.aws_security_group.bastion_sg: Creation complete after 2s [id=sg-0d2733982c71f3e82]
+module.ec2.aws_security_group.private_sg: Creation complete after 2s [id=sg-0c841b96cbe2f667f]
+module.ec2.aws_instance.app: Creating...
+module.ec2.aws_instance.jenkins: Creating...
+module.ec2.aws_security_group.public_sg: Creation complete after 2s [id=sg-00be6c0b7067fb773]
+module.vpc.aws_subnet.public_az2: Still creating... [10s elapsed]
+module.vpc.aws_subnet.public_az1: Still creating... [10s elapsed]
+module.vpc.aws_subnet.public_az2: Creation complete after 11s [id=subnet-042d86c51f1b6e0b9]
+module.vpc.aws_route_table_association.public_az2: Creating...
+module.vpc.aws_subnet.public_az1: Creation complete after 11s [id=subnet-08d1b40b657ec53f3]
+module.vpc.aws_route_table_association.public_az1: Creating...
+module.vpc.aws_nat_gateway.main: Creating...
+module.ec2.aws_instance.bastion: Creating...
+module.vpc.aws_route_table_association.public_az1: Creation complete after 0s [id=rtbassoc-0683cd4c17b1b9bd2]
+module.vpc.aws_route_table_association.public_az2: Creation complete after 0s [id=rtbassoc-037bac5cfdabb7fe7]
+module.ec2.aws_instance.app: Still creating... [10s elapsed]
+module.ec2.aws_instance.jenkins: Still creating... [10s elapsed]
+module.ec2.aws_instance.app: Creation complete after 12s [id=i-00f15fcf8ef20c558]
+module.ec2.aws_instance.jenkins: Creation complete after 13s [id=i-0582bfcf015400f8a]
+module.vpc.aws_nat_gateway.main: Still creating... [10s elapsed]
+module.ec2.aws_instance.bastion: Still creating... [10s elapsed]
+module.ec2.aws_instance.bastion: Creation complete after 12s [id=i-0721bba18b3f8c172]
+module.vpc.aws_nat_gateway.main: Still creating... [20s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [30s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [40s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [50s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [1m0s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [1m10s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [1m20s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [1m30s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [1m40s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [1m50s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [2m0s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [2m10s elapsed]
+module.vpc.aws_nat_gateway.main: Still creating... [2m20s elapsed]
+module.vpc.aws_nat_gateway.main: Creation complete after 2m24s [id=nat-08b6bc0e323e0c164]
+module.vpc.aws_route_table.private: Creating...
+module.vpc.aws_route_table.private: Creation complete after 1s [id=rtb-05eb40530bf1b576e]
+module.vpc.aws_route_table_association.private_az2: Creating...
+module.vpc.aws_route_table_association.private_az1: Creating...
+module.vpc.aws_route_table_association.private_az2: Creation complete after 0s [id=rtbassoc-015b2a1c5da83c31e]
+module.vpc.aws_route_table_association.private_az1: Creation complete after 0s [id=rtbassoc-060d937503d9a3fe7]
+╷
+│ Warning: Argument is deprecated
+│
+│   with module.vpc.aws_eip.main,
+│   on modules/vpc/main.tf line 60, in resource "aws_eip" "main":
+│   60:   vpc = true
+│
+│ use domain attribute instead
+╵
+
+Apply complete! Resources: 20 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+private_subnet_az1_id = "subnet-0eab6b33cb7839de8"
+private_subnet_az2_id = "subnet-0e39ee2a0d3604481"
+public_subnet_az1_id = "subnet-08d1b40b657ec53f3"
+public_subnet_az2_id = "subnet-042d86c51f1b6e0b9"
+vpc_id = "vpc-0287578577e54fbca"
+ubuntu@ip-172-31-24-181:~/terraform$ client_loop: send disconnect: Connection reset by peer
+
+suraj@LAPTOP-ILHBUT6P MINGW64 /d/Upgrad/keys
+$
