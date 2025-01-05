@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'app'
+    }
     environment {
         AWS_REGION = 'us-east-1' // Replace with your AWS region
         ECR_REPOSITORY = 'ninja' // Replace with your ECR repository name
